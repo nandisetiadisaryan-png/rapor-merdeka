@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapor Merdeka Pro</title>
+    <script>
+      // Skrip Penangkap Error
+      window.addEventListener('error', function (e) {
+        document.body.innerHTML = '<div style="padding: 20px; font-family: sans-serif; background-color: #ffebee; border: 2px solid #c62828; color: #b71c1c; margin: 20px;">' +
+          '<h1 style="font-size: 24px; margin-top: 0;">Terjadi Error pada Aplikasi</h1>' +
+          '<p><strong>Pesan:</strong> ' + (e.message || 'Error tidak diketahui') + '</p>' +
+          '<p><strong>File:</strong> ' + (e.filename || 'N/A') + '</p>' +
+          '<p><strong>Baris:</strong> ' + (e.lineno || 'N/A') + ', <strong>Kolom:</strong> ' + (e.colno || 'N/A') + '</p>' +
+          '<pre style="white-space: pre-wrap; word-wrap: break-word; background: #fff; padding: 10px; border: 1px solid #ddd; margin-top: 10px;">' + (e.error ? e.error.stack : 'No stack trace') + '</pre>' +
+          '</div>';
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+         document.body.innerHTML = '<div style="padding: 20px; font-family: sans-serif; background-color: #e3f2fd; border: 2px solid #0d47a1; color: #0d47a1; margin: 20px;">' +
+          '<h1 style="font-size: 24px; margin-top: 0;">Terjadi Error Asinkron (Promise)</h1>' +
+          '<p><strong>Alasan:</strong> ' + (e.reason ? (e.reason.message || e.reason) : 'Tidak diketahui') + '</p>' +
+          '<pre style="white-space: pre-wrap; word-wrap: break-word; background: #fff; padding: 10px; border: 1px solid #ddd; margin-top: 10px;">' + (e.reason ? e.reason.stack : 'No stack trace') + '</pre>' +
+          '</div>';
+      });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
+    <!-- Add Babel for in-browser JSX/TSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- PERBAIKAN: Importmap yang konsisten menggunakan React 18 dari satu sumber (esm.sh) -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react/": "https://esm.sh/react@18.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+    <!-- Changed script type to use Babel and point to the new src directory -->
+    <script type="text/babel" data-type="module" src="src/index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
